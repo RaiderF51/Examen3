@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portal de Examenes</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Animaciones personalizadas -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            verde: '#2ecc71',
+            grisOscuro: '#2f3640',
+            grisClaro: '#dcdde1',
+            amarillo: '#f1c40f',
+          },
+          animation: {
+            fadeIn: 'fadeIn 1.2s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: 0, transform: 'translateY(30px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-grisOscuro to-verde min-h-screen flex items-center justify-center px-4 py-10 text-white">
+
+  <div class="max-w-2xl w-full text-center animate-fadeIn">
+    <h1 class="text-5xl font-extrabold mb-4 text-amarillo drop-shadow-lg">Portal de Exámenes</h1>
+    <p class="text-lg mb-8 text-grisClaro">Selecciona tu grado para acceder al examen asignado.</p>
+
+    <div class="grid gap-6">
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUQU02MEYzN1hNTVVQUlZNUkY4REg3UVlDTS4u" 
+         class="block bg-verde text-white font-semibold py-4 px-6 rounded-xl shadow-xl hover:bg-emerald-600 hover:scale-105 transition-all duration-300">
+        🟢 Examen - 5to Grado
+      </a>
+
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUNjVRMVdVSFRWUjJKUFY2UFZVQzhYTVI2Vy4u" 
+         class="block bg-amarillo text-black font-semibold py-4 px-6 rounded-xl shadow-xl hover:bg-yellow-400 hover:scale-105 transition-all duration-300">
+        🟡 Examen - 4to Grado
+      </a>
+
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUNlQ3TVE0VE1NRkhBUTRTNzVEWTlGTktaNC4u" 
+         class="block bg-gray-300 text-black font-semibold py-4 px-6 rounded-xl shadow-xl hover:bg-gray-400 hover:scale-105 transition-all duration-300">
+        ⚙️ Examen - 4to PCC
+      </a>
+    </div>
+
+    <footer class="mt-12 text-sm text-gray-300">
+      &copy; 2025 Liceo PreU. Diseñado para un acceso seguro y rápido.
+    </footer>
+  </div>
+
+</body>
+</html>
