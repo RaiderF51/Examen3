@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal de Exámenes</title>
+<title>Portal de Exámenes Tecnológico</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -18,54 +18,93 @@ body {
   min-height:100vh;
   color:white;
 }
+
+/* Fondo animado fluido */
 body::before {
-  content:''; position:fixed; inset:0; z-index:-1;
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:-1;
   background:linear-gradient(270deg, #2ecc71, #0ff, #ffffff, #2ecc71, #0ff);
   background-size:1000% 1000%;
   animation: gradientFlow 30s ease infinite;
 }
+
 @keyframes gradientFlow {
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
+
+/* Pantalla de bienvenida */
 #welcome {
-  position:absolute; inset:0; background:rgba(0,0,0,0.85);
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  z-index:10; transition:opacity 0.5s ease;
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+  transition:opacity 0.5s ease;
 }
 #welcome.hidden {opacity:0; visibility:hidden;}
-#welcome h1 {font-size:3rem; color:#0ff; margin-bottom:1rem; text-shadow:0 0 15px #0ff,0 0 25px #0ff;}
+#welcome h1 {
+  font-size:3rem;
+  color:#0ff;
+  margin-bottom:1rem;
+  text-shadow:0 0 15px #0ff,0 0 25px #0ff;
+}
 #enter-btn {
   background:linear-gradient(45deg,#0ff,#2ecc71);
-  padding:1rem 2rem; border-radius:1rem; font-weight:bold;
-  color:#0a0a0f; cursor:pointer;
+  padding:1rem 2rem;
+  border-radius:1rem;
+  font-weight:bold;
+  color:#0a0a0f;
+  cursor:pointer;
   box-shadow:0 0 20px rgba(0,255,255,0.6);
   transition:transform 0.3s ease, box-shadow 0.3s ease;
 }
-#enter-btn:hover {transform:scale(1.1); box-shadow:0 0 35px rgba(0,255,255,0.8);}
+#enter-btn:hover {
+  transform:scale(1.1);
+  box-shadow:0 0 35px rgba(0,255,255,0.8);
+}
+
+/* Contenedor de tarjetas */
 #exam-links {
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:2rem; width:100%; max-width:1200px; padding:2rem 1rem; z-index:1;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:2rem;
+  width:100%;
+  max-width:1200px;
+  padding:2rem 1rem;
+  z-index:1;
 }
+
+/* Tarjetas simplificadas */
 .exam-card {
-  position:relative; background:rgba(0,0,0,0.55); backdrop-filter: blur(12px);
-  border-radius:1rem; border:2px solid rgba(255,255,255,0.2);
-  padding:2rem; text-align:center; font-weight:bold; color:white; cursor:pointer;
-  overflow:hidden; box-shadow:0 8px 25px rgba(255,255,255,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; perspective:1000px;
+  background:rgba(0,0,0,0.65);
+  border-radius:1rem;
+  border:2px solid rgba(255,255,255,0.2);
+  padding:2rem;
+  text-align:center;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.exam-card::before {
-  content:''; position:absolute; top:0; left:-75%; width:50%; height:100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
-  transform: skewX(-20deg); transition:0.5s;
+.exam-card:hover {
+  transform:scale(1.05);
+  box-shadow:0 8px 25px rgba(0,255,255,0.3);
 }
-.exam-card:hover::before {left:125%;}
-.exam-card:hover {box-shadow:0 15px 35px rgba(255,255,255,0.3);}
-.exam-emoji {font-size:2.5rem; margin-bottom:0.5rem; text-shadow:0 0 10px #fff,0 0 20px #0ff;}
-.border-green {border-color:#2ecc71; box-shadow:0 0 20px #2ecc71;}
-.border-blue {border-color:#0ff; box-shadow:0 0 20px #0ff;}
-.border-white {border-color:#fff; box-shadow:0 0 20px #fff;}
+.exam-emoji {font-size:2rem; margin-bottom:0.5rem;}
+
+/* Neon borders */
+.border-green {border-color:#2ecc71; box-shadow:0 0 10px #2ecc71;}
+.border-blue {border-color:#0ff; box-shadow:0 0 10px #0ff;}
+.border-white {border-color:#fff; box-shadow:0 0 10px #fff;}
+
+/* Footer */
 footer {margin-top:2rem; color: #000000; font-weight:bold;}
 </style>
 </head>
@@ -78,7 +117,7 @@ footer {margin-top:2rem; color: #000000; font-weight:bold;}
 
 <main id="exam-links"></main>
 
-<footer>&copy; 2025 Centro Educativo — PreU</footer>
+<footer>&copy; 2025 Centro Educativo — Portal Tecnológico</footer>
 
 <script>
 // Efecto escritura tipo terminal
@@ -111,40 +150,12 @@ const container = document.getElementById("exam-links");
 exams.forEach(exam => {
   const card = document.createElement("div");
   card.className = `exam-card ${exam.borderClass}`;
-  card.dataset.url = exam.url; // asigna url para inject.js
   card.innerHTML = `<span class="exam-emoji">${exam.emoji}</span><p>${exam.title}</p>`;
 
-  // Hover magnético
-  card.addEventListener("mousemove", e=>{
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width/2;
-    const y = e.clientY - rect.top - rect.height/2;
-    card.style.transform = `rotateX(${-y/15}deg) rotateY(${x/15}deg) scale(1.05)`;
-  });
-  card.addEventListener("mouseleave", ()=>{ card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`; });
-
-  // Confeti digital
+  // Click para abrir en misma pestaña
   card.addEventListener("click", ()=>{
-    // Confeti digital
-    for(let i=0;i<20;i++){
-      const c=document.createElement("div");
-      c.style.position="fixed";
-      c.style.width="6px"; c.style.height="6px";
-      c.style.background=`hsl(${Math.random()*360},80%,60%)`;
-      c.style.top="0"; c.style.left=`${Math.random()*100}%`;
-      c.style.opacity=0.9;
-      c.style.transition="transform 1.5s linear, opacity 1.5s";
-      document.body.appendChild(c);
-      setTimeout(()=>{ 
-        c.style.transform="translateY(100vh)"; 
-        c.style.opacity=0; 
-        setTimeout(()=>c.remove(),1600); 
-      },10);
-    }
-    // Abre el enlace en la misma ventana de la app
-    setTimeout(()=>window.location.href = exam.url,400);
-});
-
+    window.location.href = exam.url;
+  });
 
   container.appendChild(card);
 });
