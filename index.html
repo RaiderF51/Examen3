@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portal de Exámenes</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #2ecc71, #1e293b);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    /* Glassmorphism para tarjetas */
+    .exam-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      font-weight: bold;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+    }
+
+    /* Brillo animado */
+    .exam-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
+    .exam-card:hover::before {
+      left: 125%;
+    }
+
+    .exam-card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .exam-emoji {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Colores de borde personalizados */
+    .border-green {
+      border-color: #2ecc71;
+      box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+    }
+    .border-yellow {
+      border-color: #f1c40f;
+      box-shadow: 0 0 20px rgba(241, 196, 15, 0.5);
+    }
+    .border-gray {
+      border-color: #bdc3c7;
+      box-shadow: 0 0 20px rgba(189, 195, 199, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="mb-8 text-center">
+    <h1 class="text-4xl font-extrabold text-white drop-shadow-lg mb-2">
+      📚 Portal de Exámenes
+    </h1>
+    <p class="text-gray-200 opacity-90 text-lg">
+      Selecciona tu grado para acceder al examen
+    </p>
+  </header>
+
+  <main class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl" id="exam-links">
+    <!-- Tarjetas generadas dinámicamente -->
+  </main>
+
+  <footer class="mt-10 text-gray-300 text-sm">
+    &copy; 2025 Centro Educativo — Acceso rápido y seguro
+  </footer>
+
+  <script>
+    const exams = [
+      {
+        title: "Examen - 4to PCC",
+        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUMFZOOEU4RVlNQlFGMUtYSTVEQzVPTzI0Ry4u",
+        emoji: "⚙️",
+        borderClass: "border-gray"
+      },
+      {
+        title: "Examen - 5to Grado",
+        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUMlhWS0FYVURVSjVBT1A1MTFZSUlOMzE1TS4u",
+        emoji: "🟢",
+        borderClass: "border-green"
+      },
+      {
+        title: "Examen - 4to Grado",
+        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUNUM0WDNNUThVVFhSNDA4M0xVWjdKNzROVS4u",
+        emoji: "🟡",
+        borderClass: "border-yellow"
+      }
+    ];
+
+    const container = document.getElementById("exam-links");
+
+    exams.forEach(exam => {
+      const card = document.createElement("div");
+      card.className = `exam-card ${exam.borderClass}`;
+      card.innerHTML = `
+        <span class="exam-emoji">${exam.emoji}</span>
+        <p>${exam.title}</p>
+      `;
+      card.addEventListener("click", () => {
+        card.style.transform = "scale(0.95)";
+        setTimeout(() => window.open(exam.url, "_blank"), 300);
+      });
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
