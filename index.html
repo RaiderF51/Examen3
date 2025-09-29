@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal de Exámenes Tecnológico</title>
+<title>Portal de Exámenes</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -174,7 +174,7 @@ exams.forEach(exam => {
   });
   card.addEventListener("mouseleave", ()=>{ card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`; });
 
-  // Confeti digital estilo bits
+  // Confeti digital estilo bits y redirección en la misma pestaña
   card.addEventListener("click", ()=>{
     for(let i=0;i<20;i++){
       const c=document.createElement("div");
@@ -185,9 +185,14 @@ exams.forEach(exam => {
       c.style.opacity=0.9;
       c.style.transition="transform 1.5s linear, opacity 1.5s";
       document.body.appendChild(c);
-      setTimeout(()=>{ c.style.transform="translateY(100vh)"; c.style.opacity=0; setTimeout(()=>c.remove(),1600); },10);
+      setTimeout(()=>{ 
+        c.style.transform="translateY(100vh)"; 
+        c.style.opacity=0; 
+        setTimeout(()=>c.remove(),1600); 
+      },10);
     }
-    setTimeout(()=>window.open(exam.url,"_blank"),400);
+    // Redirige al Form en la misma pestaña
+    setTimeout(()=>window.location.href = exam.url,400);
   });
 
   container.appendChild(card);
