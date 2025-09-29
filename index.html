@@ -19,18 +19,18 @@ body {
   color:white;
 }
 
-/* Fondo con degradado animado */
+/* Fondo con degradado fluido mejorado */
 body::before {
   content:'';
   position:fixed;
   inset:0;
   z-index:-1;
-  background:linear-gradient(-45deg,#2ecc71,#0ff,#f1c40f,#0ff);
-  background-size:400% 400%;
-  animation: gradientBG 15s ease infinite;
+  background:linear-gradient(270deg, #2ecc71, #0ff, #ffffff, #2ecc71, #0ff);
+  background-size:1000% 1000%;
+  animation: gradientFlow 30s ease infinite;
 }
 
-@keyframes gradientBG {
+@keyframes gradientFlow {
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
@@ -53,7 +53,7 @@ body::before {
   font-size:3rem;
   color:#0ff;
   margin-bottom:1rem;
-  text-shadow:0 0 15px #0ff,0 0 25px #00ffcc;
+  text-shadow:0 0 15px #0ff,0 0 25px #0ff;
 }
 #enter-btn {
   background:linear-gradient(45deg,#0ff,#2ecc71);
@@ -84,10 +84,10 @@ body::before {
 /* Tarjetas holográficas tech */
 .exam-card {
   position:relative;
-  background:rgba(255,255,255,0.05);
+  background:rgba(0,0,0,0.55); 
   backdrop-filter: blur(12px);
   border-radius:1rem;
-  border:1px solid rgba(255,255,255,0.2);
+  border:2px solid rgba(255,255,255,0.2);
   padding:2rem;
   text-align:center;
   font-weight:bold;
@@ -112,13 +112,13 @@ body::before {
 .exam-card:hover {box-shadow:0 15px 35px rgba(255,255,255,0.3);}
 .exam-emoji {font-size:2.5rem; margin-bottom:0.5rem; text-shadow:0 0 10px #fff,0 0 20px #0ff;}
 
-/* Neon borders */
+/* Neon borders optimizados */
 .border-green {border-color:#2ecc71; box-shadow:0 0 20px #2ecc71;}
-.border-yellow {border-color:#f1c40f; box-shadow:0 0 20px #f1c40f;}
 .border-blue {border-color:#0ff; box-shadow:0 0 20px #0ff;}
+.border-white {border-color:#fff; box-shadow:0 0 20px #fff;}
 
 /* Footer */
-footer {margin-top:2rem; color: rgba(255,255,255,0.6);}
+footer {margin-top:2rem; color: #000000; font-weight:bold;}
 </style>
 </head>
 <body>
@@ -130,7 +130,7 @@ footer {margin-top:2rem; color: rgba(255,255,255,0.6);}
 
 <main id="exam-links"></main>
 
-<footer>&copy; 2025 Centro Educativo — Portal Tecnológico</footer>
+<footer>&copy; 2025 Centro Educativo — PreU</footer>
 
 <script>
 // Efecto escritura tipo terminal
@@ -155,7 +155,7 @@ document.getElementById("enter-btn").addEventListener("click", ()=>{
 const exams = [
   {title:"Examen - 4to PCC", url:"https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUMFZOOEU4RVlNQlFGMUtYSTVEQzVPTzI0Ry4u", emoji:"⚙️", borderClass:"border-blue"},
   {title:"Examen - 5to Grado", url:"https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUMlhWS0FYVURVSjVBT1A1MTFZSUlOMzE1TS4u", emoji:"🟢", borderClass:"border-green"},
-  {title:"Examen - 4to Grado", url:"https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUNUM0WDNNUThVVFhSNDA4M0xVWjdKNzROVS4u", emoji:"🟡", borderClass:"border-yellow"}
+  {title:"Examen - 4to Grado", url:"https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUNUM0WDNNUThVVFhSNDA4M0xVWjdKNzROVS4u", emoji:"🟡", borderClass:"border-white"}
 ];
 
 const container = document.getElementById("exam-links");
