@@ -1,141 +1,197 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portal de Exámenes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal de Exámenes Tecnológico</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<style>
+body {
+  margin:0; padding:0;
+  font-family:'Orbitron', sans-serif;
+  overflow-x:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  color:white;
+}
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+/* Fondo con degradado animado */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(-45deg,#2ecc71,#0ff,#f1c40f,#0ff);
+  background-size:400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
 
-  <style>
-    body {
-      background: radial-gradient(circle at top left, #2ecc71, #1e293b);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
+@keyframes gradientBG {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
 
-    /* Glassmorphism para tarjetas */
-    .exam-card {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 1rem;
-      padding: 2rem;
-      text-align: center;
-      font-weight: bold;
-      color: white;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-      cursor: pointer;
-    }
+/* Pantalla de bienvenida */
+#welcome {
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+  transition:opacity 0.5s ease;
+}
+#welcome.hidden {opacity:0; visibility:hidden;}
+#welcome h1 {
+  font-size:3rem;
+  color:#0ff;
+  margin-bottom:1rem;
+  text-shadow:0 0 15px #0ff,0 0 25px #00ffcc;
+}
+#enter-btn {
+  background:linear-gradient(45deg,#0ff,#2ecc71);
+  padding:1rem 2rem;
+  border-radius:1rem;
+  font-weight:bold;
+  color:#0a0a0f;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(0,255,255,0.6);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+#enter-btn:hover {
+  transform:scale(1.1);
+  box-shadow:0 0 35px rgba(0,255,255,0.8);
+}
 
-    /* Brillo animado */
-    .exam-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -75%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transform: skewX(-20deg);
-      transition: 0.5s;
-    }
-    .exam-card:hover::before {
-      left: 125%;
-    }
+/* Contenedor de tarjetas */
+#exam-links {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:2rem;
+  width:100%;
+  max-width:1200px;
+  padding:2rem 1rem;
+  z-index:1;
+}
 
-    .exam-card:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
-    }
+/* Tarjetas holográficas tech */
+.exam-card {
+  position:relative;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-radius:1rem;
+  border:1px solid rgba(255,255,255,0.2);
+  padding:2rem;
+  text-align:center;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(255,255,255,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  perspective:1000px;
+}
+.exam-card::before {
+  content:'';
+  position:absolute;
+  top:0; left:-75%;
+  width:50%;
+  height:100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-20deg);
+  transition:0.5s;
+}
+.exam-card:hover::before {left:125%;}
+.exam-card:hover {box-shadow:0 15px 35px rgba(255,255,255,0.3);}
+.exam-emoji {font-size:2.5rem; margin-bottom:0.5rem; text-shadow:0 0 10px #fff,0 0 20px #0ff;}
 
-    .exam-emoji {
-      font-size: 2.5rem;
-      display: block;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-    }
+/* Neon borders */
+.border-green {border-color:#2ecc71; box-shadow:0 0 20px #2ecc71;}
+.border-yellow {border-color:#f1c40f; box-shadow:0 0 20px #f1c40f;}
+.border-blue {border-color:#0ff; box-shadow:0 0 20px #0ff;}
 
-    /* Colores de borde personalizados */
-    .border-green {
-      border-color: #2ecc71;
-      box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
-    }
-    .border-yellow {
-      border-color: #f1c40f;
-      box-shadow: 0 0 20px rgba(241, 196, 15, 0.5);
-    }
-    .border-gray {
-      border-color: #bdc3c7;
-      box-shadow: 0 0 20px rgba(189, 195, 199, 0.5);
-    }
-  </style>
+/* Footer */
+footer {margin-top:2rem; color: rgba(255,255,255,0.6);}
+</style>
 </head>
-
 <body>
-  <header class="mb-8 text-center">
-    <h1 class="text-4xl font-extrabold text-white drop-shadow-lg mb-2">
-      📚 Portal de Exámenes
-    </h1>
-    <p class="text-gray-200 opacity-90 text-lg">
-      Selecciona tu grado para acceder al examen
-    </p>
-  </header>
 
-  <main class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl" id="exam-links">
-    <!-- Tarjetas generadas dinámicamente -->
-  </main>
+<div id="welcome">
+  <h1 id="welcome-title"></h1>
+  <div id="enter-btn">Entrar al Portal</div>
+</div>
 
-  <footer class="mt-10 text-gray-300 text-sm">
-    &copy; 2025 Centro Educativo — Acceso rápido y seguro
-  </footer>
+<main id="exam-links"></main>
 
-  <script>
-    const exams = [
-      {
-        title: "Examen - 4to PCC",
-        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUMFZOOEU4RVlNQlFGMUtYSTVEQzVPTzI0Ry4u",
-        emoji: "⚙️",
-        borderClass: "border-gray"
-      },
-      {
-        title: "Examen - 5to Grado",
-        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUMlhWS0FYVURVSjVBT1A1MTFZSUlOMzE1TS4u",
-        emoji: "🟢",
-        borderClass: "border-green"
-      },
-      {
-        title: "Examen - 4to Grado",
-        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUNUM0WDNNUThVVFhSNDA4M0xVWjdKNzROVS4u",
-        emoji: "🟡",
-        borderClass: "border-yellow"
-      }
-    ];
+<footer>&copy; 2025 Centro Educativo — Portal Tecnológico</footer>
 
-    const container = document.getElementById("exam-links");
+<script>
+// Efecto escritura tipo terminal
+const titleText = "💻 Portal de Exámenes";
+let i=0;
+const welcomeTitle = document.getElementById("welcome-title");
+function typeWriter() {
+  if(i<titleText.length){
+    welcomeTitle.innerHTML += titleText.charAt(i);
+    i++;
+    setTimeout(typeWriter,80);
+  }
+}
+typeWriter();
 
-    exams.forEach(exam => {
-      const card = document.createElement("div");
-      card.className = `exam-card ${exam.borderClass}`;
-      card.innerHTML = `
-        <span class="exam-emoji">${exam.emoji}</span>
-        <p>${exam.title}</p>
-      `;
-      card.addEventListener("click", () => {
-        card.style.transform = "scale(0.95)";
-        setTimeout(() => window.open(exam.url, "_blank"), 300);
-      });
+// Botón de entrada
+document.getElementById("enter-btn").addEventListener("click", ()=>{
+  document.getElementById("welcome").classList.add("hidden");
+});
 
-      container.appendChild(card);
-    });
-  </script>
+// Datos de exámenes
+const exams = [
+  {title:"Examen - 4to PCC", url:"https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUMFZOOEU4RVlNQlFGMUtYSTVEQzVPTzI0Ry4u", emoji:"⚙️", borderClass:"border-blue"},
+  {title:"Examen - 5to Grado", url:"https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUMlhWS0FYVURVSjVBT1A1MTFZSUlOMzE1TS4u", emoji:"🟢", borderClass:"border-green"},
+  {title:"Examen - 4to Grado", url:"https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAYAAO27QJBUNUM0WDNNUThVVFhSNDA4M0xVWjdKNzROVS4u", emoji:"🟡", borderClass:"border-yellow"}
+];
+
+const container = document.getElementById("exam-links");
+
+exams.forEach(exam => {
+  const card = document.createElement("div");
+  card.className = `exam-card ${exam.borderClass}`;
+  card.innerHTML = `<span class="exam-emoji">${exam.emoji}</span><p>${exam.title}</p>`;
+
+  // Hover magnético
+  card.addEventListener("mousemove", e=>{
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    card.style.transform = `rotateX(${-y/15}deg) rotateY(${x/15}deg) scale(1.05)`;
+  });
+  card.addEventListener("mouseleave", ()=>{ card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`; });
+
+  // Confeti digital estilo bits
+  card.addEventListener("click", ()=>{
+    for(let i=0;i<20;i++){
+      const c=document.createElement("div");
+      c.style.position="fixed";
+      c.style.width="6px"; c.style.height="6px";
+      c.style.background=`hsl(${Math.random()*360},80%,60%)`;
+      c.style.top="0"; c.style.left=`${Math.random()*100}%`;
+      c.style.opacity=0.9;
+      c.style.transition="transform 1.5s linear, opacity 1.5s";
+      document.body.appendChild(c);
+      setTimeout(()=>{ c.style.transform="translateY(100vh)"; c.style.opacity=0; setTimeout(()=>c.remove(),1600); },10);
+    }
+    setTimeout(()=>window.open(exam.url,"_blank"),400);
+  });
+
+  container.appendChild(card);
+});
+</script>
 </body>
 </html>
